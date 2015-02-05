@@ -70,6 +70,9 @@ h1 {
     .todolist-top #complete-all:hover {
       color: #1EA862; }
 
+.todolist-mid section {
+  transition: all .4s ease; }
+
 .todo-controls {
   padding: 10px;
   border-top: thin solid #c2c2c2;
@@ -146,6 +149,25 @@ span a.control-active {
 
 input.inedit {
   color: black; }
+
+.addlist-wrapper {
+  margin-top: 10px;
+  margin-right: 10px;
+  color: darkgray;
+  text-align: right;
+  cursor: pointer; }
+  .addlist-wrapper i.fa.fa-plus {
+    transition: color .5s ease; }
+  .addlist-wrapper span {
+    vertical-align: bottom;
+    font-size: 13px;
+    opacity: 0;
+    transition: all .5s ease; }
+  .addlist-wrapper:hover > span {
+    opacity: 1;
+    color: #4ddf95; }
+  .addlist-wrapper:hover > i {
+    color: #4ddf95; }
 
 .hidden {
   display: none; }

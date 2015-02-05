@@ -141,21 +141,42 @@ var tdl = {
 
 
     ///////////////////////////////////////////////////////
-    //Toggle all Complete
+    //Toggle Complete All
     ///////////////////////////////////////////////////////
     $('div.todolist-top').on('click', '#complete-all', function(e){
       e.preventDefault();
+      console.log("complete all clicked");
+      //Get length of current list of items
       var listLength = $('.task').length;
       console.log(listLength);
-      for( var i = 0; i < listLength; i++ ) {
-        var thisTask = $('.task').eq(i)
-        var taskId = thisTask.data('taskid');
-        var completedTask = {
-          name: thisTask.find('input[name="taskname"]').val(),
-          complete: true
-        }
-        tdl.editTask(taskId, completedTask);
-      };
+      //Complete all
+      if ($('#complete-all i').hasClass('fa-chevron-down')) {
+        $('#complete-all i').removeClass('fa-chevron-down');
+        $('#complete-all i').addClass('fa-chevron-up');
+        for( var i = 0; i < listLength; i++ ) {
+          var thisTask = $('.task').eq(i)
+          var taskId = thisTask.data('taskid');
+          var completedTask = {
+            name: thisTask.find('input[name="taskname"]').val(),
+            complete: true
+          }
+          tdl.editTask(taskId, completedTask);
+        };
+      }
+      //Uncomplete all
+      else if ($('#complete-all i').hasClass('fa-chevron-up')) {
+        $('#complete-all i').removeClass('fa-chevron-up');
+        $('#complete-all i').addClass('fa-chevron-down');
+        for( var i = 0; i < listLength; i++ ) {
+          var thisTask = $('.task').eq(i)
+          var taskId = thisTask.data('taskid');
+          var uncompletedTask = {
+            name: thisTask.find('input[name="taskname"]').val(),
+            complete: false
+          }
+          tdl.editTask(taskId, uncompletedTask);
+        };
+      }
     });
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////

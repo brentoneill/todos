@@ -60,6 +60,10 @@ h1 {
 }
 
 .todolist-mid {
+  section {
+    transition:all .4s ease;
+
+  }
 }
 
 .todo-items {
@@ -163,4 +167,29 @@ span a.control-active {
 }
 input.inedit {
   color:$black;
+}
+
+
+.addlist-wrapper {
+  margin-top:10px;
+  margin-right:10px;
+  color:darken($bg-color,30%);
+  text-align:right;
+  cursor:pointer;
+  i.fa.fa-plus {
+    transition:color .5s ease;
+  }
+  span {
+    vertical-align:bottom;
+    font-size:13px;
+    opacity:0;
+    transition:all .5s ease;
+  }
+  &:hover > span {
+    opacity:1;
+    color:lighten($green, 20%);
+  }
+  &:hover > i {
+    color:lighten($green, 20%);
+  }
 }
