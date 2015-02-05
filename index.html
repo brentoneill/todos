@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/css/compiled.css">
+  <link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <title>To-Do List app</title>
+</head>
+<body>
+  <div class="container">
+    <div class="todolist-wrapper">
+      <h1>todos</h1>
+      <div class="todolist">
+
+        <!--Top of the todo list-->
+        <div class="todolist-top">
+          <span id="complete-all"><i class="fa fa-chevron-down"></i></span>
+          <div class="new-todo-item">
+            <!-- <form class="new-todo"> -->
+              <input type="text" id="new-todo" name="new-todo" placeholder="Add item here...">
+            <!-- </form> -->
+          </div>
+        </div>
+        <!--END top of the Todo list-->
+
+        <!--Middle of the Todo list w/ tasks-->
+        <div class="todolist-mid">
+          <section class="todo-items">
+          <!---JS will place todo items here!-->
+          </section>
+        </div>
+        <!--END of middle of the todo list-->
+
+        <!--Controls for the bottom of the list-->
+        <div class="todolist-bot">
+          <div class="todo-controls">
+            <span class="count"></span>
+            <span class="toggle-controls">
+              <a href="" id="toggle-all" class="control-active">All</a>
+              <a href="" id="toggle-active">Active</a>
+              <a href="" id="toggle-compl">Completed</a>
+            </span>
+            <span class="clear-compl">
+              <a href="" id="clear-complete">Clear completed</a>
+            </span>
+          </div>
+        </div>
+        <!--END controls for bottom of list-->
+
+      </div>
+    </div>
+  </div>
+<!--Bower components-->
+<script src="assets/bower_components/jquery/dist/jquery.js"></script>
+<script src="assets/bower_components/underscore/underscore.js"></script>
+<!--Templates-->
+<script src="assets/js/template.js"></script>
+<!--Data functions-->
+<script src="assets/js/datafunctions.js"></script>
+<!--main app script-->
+<script src="assets/js/main.js"></script>
+</body>
+</html>
