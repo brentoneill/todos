@@ -4,6 +4,7 @@ templates.task = [
   "<div data-taskid='<%= _id %>' class='<% print(checkComplete(complete)) %>'>",
     "<i class='fa <% print(checkIcon(complete)) %>'></i>",
     "<input type='text' name='taskname' value='<%= name %>' disabled>",
+    "<i class='handle fa fa-arrows'></i>",
     "<i class='fa fa-close'></i>",
   "</div>"
 ].join("");

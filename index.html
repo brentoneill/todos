@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="assets/css/compiled.css">
   <link rel="stylesheet" href="assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
   <title>To-Do List app</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
 
         <!--Middle of the Todo list w/ tasks-->
         <div class="todolist-mid">
-          <section class="todo-items">
+          <section class="todo-items" id="sortable">
           <!---JS will place todo items here!-->
           </section>
         </div>
@@ -55,6 +56,7 @@
   </div>
 <!--Bower components-->
 <script src="assets/bower_components/jquery/dist/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="assets/bower_components/underscore/underscore.js"></script>
 <!--Templates-->
 <script src="assets/js/template.js"></script>
@@ -62,5 +64,18 @@
 <script src="assets/js/datafunctions.js"></script>
 <!--main app script-->
 <script src="assets/js/main.js"></script>
+
+<!--Sortable script-->
+<script>
+$(function() {
+  $( "#sortable" ).sortable({
+    handle: 'i.handle',
+    cancel: '',
+    axis: "y"
+  });
+  $( "#sortable" ).disableSelection();
+});
+</script>
+
 </body>
 </html>

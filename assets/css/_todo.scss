@@ -120,6 +120,9 @@ span a.control-active {
   &:hover > i.fa-close{
     visibility:visible;
   }
+  &:hover > i.fa-arrows{
+    visibility:visible;
+  }
   i.fa-close, i.fa-circle-o {
     cursor:pointer;
     color:darken($bg-color, 10%);
@@ -140,10 +143,10 @@ span a.control-active {
     color:$green;
     cursor:pointer;
   }
-  i.fa-close{
+  i.fa-close, i.fa-arrows{
     display:hidden;
+    cursor:pointer;
     margin-right:10px;
-    color:$red;
     opacity:.4;
     visibility:hidden;
     transition:opacity .5s ease;
@@ -151,8 +154,14 @@ span a.control-active {
       opacity:1;
     }
   }
+  i.fa-arrows {
+    color:$blue;
+  }
+  i.fa-close {
+    color:$red;
+  }
   input{
-    width:82%;
+    width:80%;
     border:0;
     font-family:$body-font;
     font-weight:300;
