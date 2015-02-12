@@ -26,7 +26,8 @@ h1 {
   font-family: "Lato", sans-serif;
   font-weight: 100;
   font-size: 60px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  color: #c2c2c2; }
 
 .todo {
   background-color: white; }
@@ -113,6 +114,8 @@ span a.control-active {
     visibility: visible; }
   .task:hover > i.fa-arrows {
     visibility: visible; }
+  .task:hover > i.fa-bookmark {
+    visibility: visible; }
   .task i.fa-close, .task i.fa-circle-o {
     cursor: pointer;
     color: gainsboro; }
@@ -128,28 +131,31 @@ span a.control-active {
     margin-right: 8px;
     color: #1EA862;
     cursor: pointer; }
-  .task i.fa-close, .task i.fa-arrows {
-    display: hidden;
+  .task i.fa-close, .task i.fa-arrows, .task i.fa-bookmark {
     cursor: pointer;
     margin-right: 10px;
     opacity: .4;
     visibility: hidden;
     transition: opacity .5s ease; }
-    .task i.fa-close:hover, .task i.fa-arrows:hover {
+    .task i.fa-close:hover, .task i.fa-arrows:hover, .task i.fa-bookmark:hover {
       opacity: 1; }
+  .task i.fa-bookmark {
+    color: #F2CE20; }
   .task i.fa-arrows {
     color: #00D6DB; }
   .task i.fa-close {
     color: #A8253B; }
   .task input {
-    width: 80%;
+    width: 78%;
     border: 0;
     font-family: "Lato", sans-serif;
     font-weight: 300;
     font-size: 14px;
     vertical-align: top;
     border: thin solid transparent;
-    color: darkgray; }
+    color: darkgray;
+    transition: all .5s ease;
+    background-color: transparent; }
     .task input:focus {
       outline: 0; }
 
@@ -174,6 +180,9 @@ input.inedit {
     color: #4ddf95; }
   .addlist-wrapper:hover > i {
     color: #4ddf95; }
+
+.highlighted {
+  background-color: #fdf8e1; }
 
 .hidden {
   display: none; }

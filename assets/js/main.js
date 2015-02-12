@@ -1,7 +1,8 @@
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 ////       ToDo List application for the Iron Yard     ////
-////       Modeled after ToDoMVC.com (backbone)        ////
+////       Modeled after ToDoMVC.com                   ////
+////       By: Brent O'Neill                           ////
 ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
@@ -39,15 +40,17 @@ var tdl = {
     ///////////////////////////////////////////////////////
     $('div.todolist-top').bind('keypress', function(e) {
       if(e.keyCode==13){
-      // Enter pressed...do something cool
         var newTask = {
           name: $('.new-todo-item').find('input[name="new-todo"]').val(),
-          complete: false
+          complete: false,
+          highlighted: false,
+          sortId: $('.task').length
         }
         if(newTask.name=="") {
-          //do nothing
+          //do nothing!
         }
-        else {tdl.createTask(newTask);
+        else {
+          tdl.createTask(newTask);
           $('.new-todo-item').find('input[name="new-todo"]').val("");
         }
       }
@@ -97,7 +100,6 @@ var tdl = {
         var taskId = $(revisedTask).closest('.task').data('taskid');
         var editedTask = {
           name: $(revisedTask).val(),
-          complete:false
         }
         if(editedTask.name=="") {
           //do nothing
@@ -120,7 +122,6 @@ var tdl = {
       e.preventDefault();
       var taskId = $(this).closest('.task').data('taskid');
       var completedTask = {
-        name: $(this).find('input[name="taskname"]').val(),
         complete: true
       }
       tdl.editTask(taskId, completedTask);
@@ -130,7 +131,6 @@ var tdl = {
       e.preventDefault();
       var taskId = $(this).closest('.task').data('taskid');
       var completedTask = {
-        name: $(this).find('input[name="taskname"]').val(),
         complete: false
       }
       tdl.editTask(taskId, completedTask);
@@ -139,6 +139,28 @@ var tdl = {
     ///////////////////////////////////////////////////////
 
 
+
+
+    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+    //Toggle highlighted
+    $('section').on('click', 'i.fa-bookmark', function(e){
+      e.preventDefault();
+      var taskId = $(this).closest('.task').data('taskid');
+      if($(this).closest('.task').hasClass('highlighted')) {
+        var task = {
+          highlighted: false,
+        }
+      }
+      else{
+        var task = {
+          highlighted: true,
+        }
+      }
+      tdl.editTask(taskId, task);
+    });
+    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
 
 
     ///////////////////////////////////////////////////////
@@ -183,6 +205,21 @@ var tdl = {
     ///////////////////////////////////////////////////////
 
 
+    //ONLY NEEDED IN EXTREME CASES WHEN I NEED TO WIPE DATA
+    // $('.todolist-wrapper').on('click', '.delete-data', function(e){
+    //   e.preventDefault();
+    //   console.log('event fired');
+    //   //clear items marked as complete
+    //   var listLength = $('.task').length;
+    //   for( var i = 0; i < listLength; i++ ) {
+    //     var thisTask = $('.task').eq(i);
+    //     console.log(thisTask);
+    //     tdl.deleteTask(thisTask.data('taskid'));
+    //     console.log('task deleted');
+    //     tdl.renderAllTasks();
+    //   }
+    // });
+    ///////////////////////////////////////////////////////
 
 
     ///////////////////////////////////////////////////////
@@ -207,7 +244,44 @@ var tdl = {
 
 
     ///////////////////////////////////////////////////////
-    //Display control event bidings for All, Active, Complete
+    //Event binding for sort w/ jQuery UI
+    ///////////////////////////////////////////////////////
+    $( "#sortable" ).on( "sortupdate", function( event, ui ) {
+      var sortArray = []
+      for( var i = 0 ; i < $('.task').length ; i++ ){
+        sortArray[i] = $('.task').eq(i).data('taskid');
+      }
+      console.log(sortArray);
+      $.ajax({
+        type:'GET',
+        url: tdl.config.url,
+        success:function(data){
+          for( var i = 0; i < data.length; i++){
+              data[i] = {
+                _id:         data[i]._id,
+                name:        data[i].name,
+                complete:    data[i].complete,
+                sortId:      _.indexOf(sortArray, data[i]._id)
+              }
+              var taskId = data[i]._id;
+              var task = data[i];
+              tdl.editTask(taskId, task);
+          }
+          tdl.renderAllTasks
+        },
+        error:function(err) {
+          console.log(err);
+        }
+      });
+    });
+    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+
+
+
+
+    ///////////////////////////////////////////////////////
+    //Display control event bindings for All, Active, Complete
     ///////////////////////////////////////////////////////
     ////Active
     $('.todo-controls').on('click', '#toggle-active', function(e){
@@ -256,12 +330,15 @@ var tdl = {
       url: tdl.config.url,
       type: 'GET',
       success: function(tasks) {
+        tasks = _.sortBy(tasks, 'sortId');
         var compiled = _.template(templates.task);
         var markup = "";
         tasks.forEach(function(item, idx, array){
           markup += compiled(item);
         });
         $('section').html(markup);
+
+        //Keeps track of completed tasks
         var completedTasks = _.where(tasks, {complete:"false"});
         $('.count').text(completedTasks.length + " items left");
       },
@@ -328,7 +405,8 @@ var tdl = {
       data: task,
       type: 'PUT',
       success: function(data) {
-        tdl.renderAllTasks(data);
+        console.log("task edited");
+        tdl.renderAllTasks();
       },
       error: function(err) {
         console.log(err);
@@ -337,6 +415,7 @@ var tdl = {
   },
   ///////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////
+
 };
 ///////////////////////////////////////////////////////////
 ////          END   ToDo List object    END             ///

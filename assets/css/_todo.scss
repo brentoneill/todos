@@ -3,6 +3,7 @@ h1 {
   font-weight:100;
   font-size:60px;
   margin-bottom:20px;
+  color:darken($bg-color, 20%);
 }
 
 .todo {
@@ -123,6 +124,9 @@ span a.control-active {
   &:hover > i.fa-arrows{
     visibility:visible;
   }
+  &:hover > i.fa-bookmark {
+    visibility:visible;
+  }
   i.fa-close, i.fa-circle-o {
     cursor:pointer;
     color:darken($bg-color, 10%);
@@ -143,8 +147,7 @@ span a.control-active {
     color:$green;
     cursor:pointer;
   }
-  i.fa-close, i.fa-arrows{
-    display:hidden;
+  i.fa-close, i.fa-arrows, i.fa-bookmark{
     cursor:pointer;
     margin-right:10px;
     opacity:.4;
@@ -154,6 +157,9 @@ span a.control-active {
       opacity:1;
     }
   }
+  i.fa-bookmark {
+    color:$yellow;
+  }
   i.fa-arrows {
     color:$blue;
   }
@@ -161,7 +167,7 @@ span a.control-active {
     color:$red;
   }
   input{
-    width:80%;
+    width:78%;
     border:0;
     font-family:$body-font;
     font-weight:300;
@@ -169,6 +175,8 @@ span a.control-active {
     vertical-align:top;
     border:thin solid rgba(0,0,0,.0);
     color:darken($bg-color, 30%);
+    transition:all .5s ease;
+    background-color: rgba(0,0,0,0);
     &:focus {
       outline:0;
     }
@@ -201,4 +209,9 @@ input.inedit {
   &:hover > i {
     color:lighten($green, 20%);
   }
+}
+
+.highlighted {
+  background-color:lighten($yellow, 40%);
+
 }
