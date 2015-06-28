@@ -247,7 +247,7 @@ var tdl = {
     //Event binding for sort w/ jQuery UI
     ///////////////////////////////////////////////////////
     $( "#sortable" ).on( "sortupdate", function( event, ui ) {
-      var sortArray = []
+      var sortArray = [];
       for( var i = 0 ; i < $('.task').length ; i++ ){
         sortArray[i] = $('.task').eq(i).data('taskid');
       }
@@ -310,6 +310,15 @@ var tdl = {
     //End Eevent bindings for All, Active, Complete
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
+
+
+
+    $('.container').on('click', '.addlist-wrapper', function(e){
+      e.preventDefault();
+      console.log('');
+    })
+
+
   },
 
 
